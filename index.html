@@ -1,57 +1,92 @@
-<html>
+<!DOCTYPE html>
+<html lang = "en">
     <head>
-        <title>HI I LIKE TO PLAY GAMES AND DRAW YAY!</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title> Maia's Newsletter </title>
     </head>
 
-    <body>
-        <H1>AS THE TITLE SAYS I LIKE TO DRAW</H1>
-        <H2>I DONT HAVE A LOT OF HOBBIES</H2>
-        <H3>SO IM REALLY STRUGGLING TO FIND SOMETHING TO TALK ABOUT HERE</H3>
-    </body>
+    <h1>Sign up for my newsletter below!</h1>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="firstName"> First name </label>
+            <input type="text" class="form-control" id="firstName">
+        </div>
 
-    <p>
-        HI I AM NINETEEN AND IM KIND OF SHORT AND MY BIRTHDAYS ON CHRISTMAS EVE SO I GET CALLED SANTAS ELF
-        <br/>THE WORLD IS VERY CONFUSING AND I DONT KNOW HOW TO DO A LOT OF STUFF BUT I DO MY BEST BUT MY BESTS NOT A LOT
-        <br/>I DRAW PREEETTY GOOD THOUGH SO IVE BEEN TOLD SO HERE IS THAT
-        <br/>
-        <img src="ganymedeling.jpg" style="width:770px;height:591px;"/>
-        <br/>
-        <br/>THIS IS SOMEONE ELSES CHARACTER THOUGH I JUST DREW THIS CUZ THE DESIGN IS COOL
-        <br/>
- 
-        ALSO HERE IS 
-        <a href="https://www.youtube.com/watch?v=Q2XJNYVOaok"> ONE OF MY FAVORITE SONGS</a>
-        RIGHT NOW
-        <br/>
-        <br/> EVERYTHING IS IN CAPS BECAUSE IM HAVING FUN
-        <br/>
-        <br/>LIST OF THINGS I LOVE:
+        <div class="form-group">
+            <label for="lastName"> Last name </label>
+            <input type="text" class="form-control" id="lastName">
+        </div>
 
-        <ul>
-            <li>YANKEE CANDLE CLEAN LINEN SCENT</li>
-            <li>DRAWING</li>
-            <li>peach yogurt sometimes</li>
-            <li>LISTENING TO MY FRIENDS TALK AND SAYING NOTHING</li>
-            <li>DRAWING AGAIN</li>
-        </ul>
-
-        <br/>
-        <br/>LIST OF THINGS I DO NOT LOVE:
-
-        <ul>
-            <li>c++ arrays in classes</li>
-            <li>especially array destructors</li>
-        </ul>
-
-        <br/>
-        <br/> i know you said this should look like an about me for like getting hired and stuff 
-        <br/>so ill probably change it with time but for now i do not have enough to say to just include stuff u listed
-
-        <hr>
-        9/17/2025 Maia Diaz
-
-    </p>
+        <div class="form-group">
+            <label for="emailInput"> Email </label>
+            <input type="email" class="form-control" id="emailInput">
+        </div>
+    
+        <div class="form-group">
+            <label for="passwordInput"> Password </label>
+            <input type="password" class="form-control" id="passwordInput">
+        </div>
+        
+        <div class="form-group">
+            <label for="DOB"> Birthdate </label>
+            <input type="date" class="form-control" id="DOB">
+        </div>
 
 
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> Sign up to recieve emails from this newsletter?
+            </label>
+        </div>
+    </form>
+
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg">
+                <button onclick="submitInfo()">Submit Info?</button>
+
+                <h3>Your information:</h3>
+                <p id="display1"></p>
+                <p id="display2"></p>
+                <p id="display3"></p>
+                <p id="display4"></p>
+                <p id="display5"></p>
+                
+                <!-- There are things that do not work in script but I did try -->
+                <!-- Could not figure out how to check if one field was empty -->
+
+                <script>
+                    function submitInfo(){
+                        let pWord = document.getElementById("passwordInput");
+
+                        if (pWord.contains("?") || pWord.contains("!")){
+
+                            let fName = document.getElementById("firstName");
+                            document.getElementById("display1").innerHTML = fName;
+                            let lName = document.getElementById("lastName");
+                            document.getElementById("display2").innerHTML = lName;
+                            let elecMail = document.getElementById("emailInput");
+                            document.getElementById("display3").innerHTML = elecMail;
+
+
+                            pWord = pWord.replaceAll(pWord,"*")
+                            document.getElementById("display4").innerHTML = pWord;
+
+                            let bDay = document.getElementById("DOB");
+                            document.getElementById("display5").innerHTML = bDay;
+                        }
+
+                        else{
+                            console.log("Password must contain a special character (? or !)");
+                        }
+                        
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
 </html>
-
