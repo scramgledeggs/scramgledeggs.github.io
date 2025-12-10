@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    
+    <style type="text/css">
+    body { background: #fff1cc !important; }
+    </style>
+
+
+    <title>Functionary</title>
+</head>
+<body>
+            <div class="bg-warning m-5 p-3">
+                <p class="display-5 fw-bold text-center">Word Guess</p>
+                <p class="text-center">Answers are not case sensitive. Only seven words are currently in rotation, since I probably wouldn't be able to guess it otherwise!</p>
+            </div>
+
+            <!-- -->
+            
+            <div class="d-grid gap-2 col-8 mx-auto">
+                <button onclick="gameStart()" class="btn btn-outline-info btn-lg btn-block">Lets play!</button>
+            </div>
+
+            <div class="form-group bg-info m-5 p-2">
+
+                <p class="lead text-center text-light" id="fl"></p>
+                <p class="lead fw-bold text-center text-light" id="shortdef"></p>
+
+                <input type="text" class="form-control" id="guess" placeholder="Enter guess here">
+                <div class="d-grid gap-2 col-8 mx-auto">
+                    <br>
+                    <button onclick="checkAnswer()" class="btn btn-outline-light btn-sm">Check!</button>
+                    <p class="lead fw-bold text-center text-light" id="result"></p>
+                </div>
+            </div>
+
+            <script>
+                
+                const wordSelection = ["buzz", "hubbub", "smooth", "placate", "lasso", "thesaurus", "drove"];
+
+                function gameStart(){
+                     var random = Math.floor(Math.random() * 7);
+
+                     word = wordSelection[random];
+                     fetchData();
+
+                     return word;
+
+                }
+
+                function checkAnswer(){
+                    let userInput = document.getElementById("guess").value.toLowerCase();
+
+                    if (userInput == word) {
+                        document.getElementById("result").innerHTML = "Correct!!!";
+                        return;                    }
+
+                    document.getElementById("result").innerHTML = "wuh oh :( nope";
+                }
+
+                async function fetchData(){
+
+                    try{
+                        const response = await fetch(`https://www.dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=79f6cc56-6389-4bd6-802e-675b97862ec1`);
+
+                        if(!response.ok){
+                            throw new Error("Uh oh");
+                        }
+
+                        const data = await response.json();
+
+                        document.getElementById("fl").innerHTML = data[0].fl;
+                        document.getElementById("shortdef").innerHTML = data[0].shortdef[0];
+
+                    }
+                        catch(error){
+                            console.error(error);
+                        }
+                }
+            </script>
+
+
+            <div class="d-grid gap-2 col-8 mx-auto">
+                <p class="text-center">Finished playing?</p>
+                <button onclick="location.href='index.html'" class="btn btn-outline-info btn-lg btn-block">Take me back!</button>
+            </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
